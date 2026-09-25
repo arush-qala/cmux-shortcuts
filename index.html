@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>cmux Shortcuts — macOS Defaults</title>
+<meta name="description" content="Searchable list of default cmux keyboard shortcuts on macOS." />
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --card: #ffffff;
+    --border: #e1e4e8;
+    --text: #1f2328;
+    --muted: #59636e;
+    --accent: #0969da;
+    --accent-bg: #ddf4ff;
+    --kbd-bg: #f6f8fa;
+    --code: #24292f;
+    --amber-bg: #fff8c5;
+    --amber-border: #d4a017;
+    --amber-text: #7a5a00;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  code, kbd, .mono {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  header.top {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+  .title-row { display: flex; align-items: baseline; gap: 12px; padding: 20px 0 8px; flex-wrap: wrap; }
+  h1 { font-size: 22px; margin: 0; letter-spacing: -0.01em; }
+  h1 span.accent { color: var(--accent); }
+  .subtitle { color: var(--muted); font-size: 13.5px; margin: 0 0 12px; }
+  .subtitle a { color: var(--accent); text-decoration: none; }
+  .subtitle a:hover { text-decoration: underline; }
+  .search-row { display: flex; gap: 8px; padding-bottom: 10px; }
+  .search-box { position: relative; flex: 1; }
+  .search-box input {
+    width: 100%;
+    padding: 10px 36px 10px 36px;
+    font-size: 15px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--text);
+    outline: none;
+  }
+  .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); }
+  .search-icon {
+    position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 15px; pointer-events: none;
+  }
+  .clear-btn {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    border: 0; background: transparent; color: var(--muted);
+    font-size: 16px; cursor: pointer; padding: 4px 8px; border-radius: 6px;
+    display: none;
+  }
+  .clear-btn:hover { background: var(--bg); color: var(--text); }
+  .reset-btn {
+    border: 1px solid var(--border); background: #fff; border-radius: 8px;
+    padding: 0 14px; font-size: 13.5px; cursor: pointer; color: var(--text);
+    white-space: nowrap;
+  }
+  .reset-btn:hover { background: var(--bg); }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding: 2px 0 12px; }
+  .pill {
+    border: 1px solid var(--border); background: #fff; border-radius: 999px;
+    padding: 4px 10px; font-size: 12.5px; cursor: pointer; color: var(--text);
+    user-select: none;
+  }
+  .pill .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .pill[aria-pressed="true"] { background: var(--text); color: #fff; border-color: var(--text); }
+  .pill[aria-pressed="true"] .n { color: #c8d1d9; }
+  .mod-group { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-left: 4px; }
+  .mod-label { font-size: 12.5px; color: var(--muted); }
+  .mod {
+    border: 1px solid var(--border); background: #fff; border-radius: 6px;
+    padding: 3px 8px; font-size: 12.5px; cursor: pointer; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .mod[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .check { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text); cursor: pointer; border: 1px solid var(--border); background: #fff; border-radius: 6px; padding: 3px 8px; }
+  .count-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0 6px; color: var(--muted); font-size: 13px; }
+  .count-row strong { color: var(--text); font-variant-numeric: tabular-nums; }
+  main { padding-bottom: 48px; }
+  section.cat { margin-top: 18px; }
+  section.cat h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+  section.cat h2 .cnt { background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 0 8px; font-size: 12px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 12px; border-bottom: 1px solid var(--border);
+  }
+  .row:last-child { border-bottom: 0; }
+  .row .main { flex: 1; min-width: 0; }
+  .row .action { font-size: 14px; font-weight: 600; }
+  .row .detail { font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+  .keys { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; align-items: center; }
+  kbd {
+    background: var(--kbd-bg); border: 1px solid var(--border);
+    border-bottom-width: 2px; border-radius: 6px;
+    padding: 2px 7px; font-size: 12.5px; color: var(--code); white-space: nowrap;
+  }
+  .alt-sep { color: var(--muted); font-size: 12px; }
+  .unbound {
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber-text);
+    border-radius: 6px; padding: 3px 8px; white-space: nowrap;
+  }
+  .copy {
+    border: 1px solid transparent; background: transparent; color: var(--muted);
+    border-radius: 6px; cursor: pointer; font-size: 13px; padding: 3px 6px;
+  }
+  .copy:hover { background: var(--bg); color: var(--text); border-color: var(--border); }
+  .empty {
+    background: #fff; border: 1px dashed var(--border); border-radius: var(--radius);
+    padding: 32px 20px; text-align: center; color: var(--muted); margin-top: 20px;
+  }
+  footer { border-top: 1px solid var(--border); padding: 18px 0 40px; color: var(--muted); font-size: 12.5px; }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .hint { font-size: 12px; color: var(--muted); }
+  .hint kbd { font-size: 11px; }
+  @media (max-width: 640px) {
+    .row { flex-direction: column; align-items: flex-start; }
+    .keys { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="title-row">
+      <h1><span class="accent">cmux</span> Shortcuts — macOS defaults</h1>
+    </div>
+    <p class="subtitle">
+      Searchable reference for default cmux-owned shortcuts on macOS.
+      Source: <a href="https://cmux.com/docs/keyboard-shortcuts" target="_blank" rel="noopener">cmux.com/docs/keyboard-shortcuts</a>
+      &middot; Updated Sep 2026 &middot; <span id="totalCount"></span>
+    </p>
+    <div class="search-row">
+      <div class="search-box">
+        <span class="search-icon">/</span>
+        <input id="q" type="search" placeholder="Filter shortcuts — try &quot;pane&quot;, &quot;zoom&quot;, &quot;browser&quot;, &quot;cmd+d&quot;…" autocomplete="off" aria-label="Filter shortcuts" />
+        <button class="clear-btn" id="clearBtn" aria-label="Clear search">×</button>
+      </div>
+      <button class="reset-btn" id="resetBtn">Reset</button>
+    </div>
+    <div class="filters">
+      <div id="catPills" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+      <div class="mod-group" id="modGroup" role="group" aria-label="Modifier filter">
+        <span class="mod-label">Mods:</span>
+        <button class="mod" data-mod="cmd" aria-pressed="false">⌘</button>
+        <button class="mod" data-mod="ctrl" aria-pressed="false">⌃</button>
+        <button class="mod" data-mod="opt" aria-pressed="false">⌥</button>
+        <button class="mod" data-mod="shift" aria-pressed="false">⇧</button>
+        <button class="check" id="hideUnbound" aria-pressed="false" title="Hide actions that ship with no keys assigned">Hide unbound</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="count-row">
+    <div id="count"></div>
+    <div class="hint">Press <kbd>/</kbd> to focus &middot; <kbd>Esc</kbd> to clear</div>
+  </div>
+  <main id="list"></main>
+  <div class="empty" id="empty" hidden>
+    No shortcuts match. Try a shorter term or press Reset.
+  </div>
+  <footer>
+    Static page, no tracking. Data transcribed from cmux docs defaults for macOS.
+    Every cmux-owned shortcut can be changed in Settings or <span class="mono">~/.config/cmux/cmux.json</span>.
+    Unbound rows are actions cmux ships with no keys assigned.
+  </footer>
+</div>
+
+<script>
+"use strict";
+// display: array of alternatives; each alternative is an array of key tokens.
+// mods: ["cmd","ctrl","opt","shift"] present anywhere in the binding.
+const SHORTCUTS = [
+  // ---- App ----
+  { cat: "App", action: "Settings", display: [["\u2318", ","]], mods: ["cmd"] },
+  { cat: "App", action: "Reload configuration", display: [["\u2318", "\u21E7", ","]], mods: ["cmd", "shift"] },
+  { cat: "App", action: "Show/hide all cmux windows", detail: "System-wide hotkey", display: [["\u2303", "\u2325", "\u2318", "."]], mods: ["ctrl", "opt", "cmd"] },
+  { cat: "App", action: "Global search", detail: "When cmux is active", display: [["\u2325", "\u2318", "F"]], mods: ["opt", "cmd"] },
+  { cat: "App", action: "Command palette", display: [["\u2318", "\u21E7", "P"]], mods: ["cmd", "shift"] },
+  { cat: "App", action: "Command palette next result", detail: "When the command palette is open", display: [["\u2303", "N"]], mods: ["ctrl"] },
+  { cat: "App", action: "Command palette previous result", detail: "When the command palette is open", display: [["\u2303", "P"]], mods: ["ctrl"] },
+  { cat: "App", action: "New window", display: [["\u2318", "\u21E7", "N"]], mods: ["cmd", "shift"] },
+  { cat: "App", action: "Close window", display: [["\u2303", "\u2318", "W"]], mods: ["ctrl", "cmd"] },
+  { cat: "App", action: "Toggle full screen", display: [["\u2303", "\u2318", "F"]], mods: ["ctrl", "cmd"] },
+  { cat: "App", action: "Send feedback", unbound: true },
+  { cat: "App", action: "Reopen previous session", display: [["\u2318", "\u21E7", "O"]], mods: ["cmd", "shift"] },
+  { cat: "App", action: "Quit cmux", display: [["\u2318", "Q"]], mods: ["cmd"] },
+  // ---- Workspaces ----
+  { cat: "Workspaces", action: "Toggle left sidebar", display: [["\u2318", "B"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "Toggle right sidebar", display: [["\u2318", "\u2325", "B"]], mods: ["cmd", "opt"] },
+  { cat: "Workspaces", action: "New workspace", display: [["\u2318", "N"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "New browser workspace", detail: "First surface is a browser pane with the address bar focused", display: [["\u2325", "\u2318", "N"]], mods: ["opt", "cmd"] },
+  { cat: "Workspaces", action: "New cloud workspace", detail: "Creates a workspace on the starred default cmux Cloud machine", display: [["\u2318", "Y"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "New cloud machine", display: [["\u21E7", "\u2318", "Y"]], mods: ["shift", "cmd"] },
+  { cat: "Workspaces", action: "Save current workspace layout as a template", display: [["\u2303", "\u2318", "S"]], mods: ["ctrl", "cmd"] },
+  { cat: "Workspaces", action: "Open folder", display: [["\u2318", "O"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "Go to workspace", detail: "Workspace switcher", display: [["\u2318", "P"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "Next workspace", display: [["\u2303", "\u2318", "]"]], mods: ["ctrl", "cmd"] },
+  { cat: "Workspaces", action: "Previous workspace", display: [["\u2303", "\u2318", "["]], mods: ["ctrl", "cmd"] },
+  { cat: "Workspaces", action: "Next workspace in group", detail: "Skips the group anchor and uses window-wide cycling when ungrouped", unbound: true },
+  { cat: "Workspaces", action: "Previous workspace in group", detail: "Skips the group anchor and uses window-wide cycling when ungrouped", unbound: true },
+  { cat: "Workspaces", action: "Move workspace up", display: [["\u2303", "\u2325", "\u2318", "["]], mods: ["ctrl", "opt", "cmd"] },
+  { cat: "Workspaces", action: "Move workspace down", display: [["\u2303", "\u2325", "\u2318", "]"]], mods: ["ctrl", "opt", "cmd"] },
+  { cat: "Workspaces", action: "Focus back", detail: "Cmd+[ outside browser panes; unbind to let terminal shortcuts handle those keys", display: [["\u2318", "["]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "Focus forward", detail: "Cmd+] outside browser panes; unbind to let terminal shortcuts handle those keys", display: [["\u2318", "]"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "Select workspace 1\u20269", display: [["\u2318", "1\u20269"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "Rename workspace", display: [["\u2318", "\u21E7", "R"]], mods: ["cmd", "shift"] },
+  { cat: "Workspaces", action: "Edit workspace description", display: [["\u2325", "\u2318", "E"]], mods: ["opt", "cmd"] },
+  { cat: "Workspaces", action: "Mark workspace as done", display: [["\u2318", ";"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "Cycle workspace status one lane forward", display: [["\u2318", "\u21E7", ";"]], mods: ["cmd", "shift"] },
+  { cat: "Workspaces", action: "Toggle the highlighted checklist item", detail: "Applies in the focused todo pane or checklist popover", display: [["\u2318", "\u23A9"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "New empty workspace group", display: [["\u2303", "\u2318", "G"]], mods: ["ctrl", "cmd"] },
+  { cat: "Workspaces", action: "Group selected workspaces", display: [["\u2318", "\u21E7", "G"]], mods: ["cmd", "shift"] },
+  { cat: "Workspaces", action: "Collapse or expand focused workspace group", display: [["\u2303", "\u2318", "."]], mods: ["ctrl", "cmd"] },
+  { cat: "Workspaces", action: "Toggle right-sidebar focus", display: [["\u2318", "\u21E7", "E"]], mods: ["cmd", "shift"] },
+  { cat: "Workspaces", action: "Navigate focused sidebar rows", detail: "In Files, H / L collapse and expand folders. Search starts with /", display: [["J"], ["K"], ["\u2303", "N"], ["\u2303", "P"], ["H"], ["L"]], mods: ["ctrl"] },
+  { cat: "Workspaces", action: "Open selected file or toggle folder", detail: "Focused file explorer", display: [["\u23A9"]], mods: [] },
+  { cat: "Workspaces", action: "Open selected file or toggle folder", detail: "Finder-style alias for the focused file explorer", display: [["\u2318", "\u2193"]], mods: ["cmd"] },
+  { cat: "Workspaces", action: "Close workspace", display: [["\u2318", "\u21E7", "W"]], mods: ["cmd", "shift"] },
+  { cat: "Workspaces", action: "Reopen closed workspace", unbound: true },
+  // ---- Surfaces ----
+  { cat: "Surfaces", action: "New surface", detail: "Tabs inside a pane", display: [["\u2318", "T"]], mods: ["cmd"] },
+  { cat: "Surfaces", action: "Next surface", display: [["\u2318", "\u21E7", "]"]], mods: ["cmd", "shift"] },
+  { cat: "Surfaces", action: "Previous surface", display: [["\u2318", "\u21E7", "["]], mods: ["cmd", "shift"] },
+  { cat: "Surfaces", action: "Reorder surface left", display: [["\u2325", "\u2318", "\u21E7", "["]], mods: ["opt", "cmd", "shift"] },
+  { cat: "Surfaces", action: "Reorder surface right", display: [["\u2325", "\u2318", "\u21E7", "]"]], mods: ["opt", "cmd", "shift"] },
+  { cat: "Surfaces", action: "Move surface to previous pane", display: [["\u2303", "\u2318", "\u21E7", "["]], mods: ["ctrl", "cmd", "shift"] },
+  { cat: "Surfaces", action: "Move surface to next pane", display: [["\u2303", "\u2318", "\u21E7", "]"]], mods: ["ctrl", "cmd", "shift"] },
+  { cat: "Surfaces", action: "Move surface to pane on left", display: [["\u2325", "\u2318", "\u21E7", "\u2190"]], mods: ["opt", "cmd", "shift"] },
+  { cat: "Surfaces", action: "Move surface to pane on right", display: [["\u2325", "\u2318", "\u21E7", "\u2192"]], mods: ["opt", "cmd", "shift"] },
+  { cat: "Surfaces", action: "Move surface to pane above", display: [["\u2325", "\u2318", "\u21E7", "\u2191"]], mods: ["opt", "cmd", "shift"] },
+  { cat: "Surfaces", action: "Move surface to pane below", display: [["\u2325", "\u2318", "\u21E7", "\u2193"]], mods: ["opt", "cmd", "shift"] },
+  { cat: "Surfaces", action: "Select surface 1\u20269", display: [["\u2303", "1\u20269"]], mods: ["ctrl"] },
+  { cat: "Surfaces", action: "Rename tab", display: [["\u2318", "R"]], mods: ["cmd"] },
+  { cat: "Surfaces", action: "Close tab", display: [["\u2318", "W"]], mods: ["cmd"] },
+  { cat: "Surfaces", action: "Close other tabs in pane", display: [["\u2325", "\u2318", "T"]], mods: ["opt", "cmd"] },
+  { cat: "Surfaces", action: "Reopen last closed", display: [["\u2318", "\u21E7", "T"]], mods: ["cmd", "shift"] },
+  { cat: "Surfaces", action: "Toggle terminal copy mode", display: [["\u2318", "\u21E7", "M"]], mods: ["cmd", "shift"] },
+  { cat: "Surfaces", action: "Clear screen (keep scrollback)", display: [["\u2318", "\u21E7", "K"]], mods: ["cmd", "shift"] },
+  { cat: "Surfaces", action: "Simulator: Home", detail: "Focused Simulator", display: [["\u2318", "\u21E7", "H"]], mods: ["cmd", "shift"] },
+  { cat: "Surfaces", action: "Simulator: rotate left", detail: "Focused Simulator", display: [["\u2318", "\u2190"]], mods: ["cmd"] },
+  { cat: "Surfaces", action: "Simulator: rotate right", detail: "Focused Simulator", display: [["\u2318", "\u2192"]], mods: ["cmd"] },
+  { cat: "Surfaces", action: "Simulator: toggle appearance", detail: "Focused Simulator", display: [["\u2318", "\u21E7", "A"]], mods: ["cmd", "shift"] },
+  { cat: "Surfaces", action: "Simulator: toggle software keyboard", detail: "Focused Simulator", display: [["\u2318", "K"]], mods: ["cmd"] },
+  { cat: "Surfaces", action: "Switch focus between terminal and TextBox input", display: [["\u2318", "\u21E7", "A"]], mods: ["cmd", "shift"] },
+  { cat: "Surfaces", action: "Cycle TextBox submit action", display: [["\u21E7", "Tab"]], mods: ["shift"] },
+  { cat: "Surfaces", action: "Attach file to TextBox input", display: [["\u2325", "\u2318", "\u21E7", "A"]], mods: ["opt", "cmd", "shift"] },
+  { cat: "Surfaces", action: "Send Ctrl-F to terminal", detail: "Forwards Ctrl-F to the focused terminal", unbound: true },
+  { cat: "Surfaces", action: "Save file preview", detail: "Focused text preview", display: [["\u2318", "S"]], mods: ["cmd"] },
+  // ---- Split Panes ----
+  { cat: "Split Panes", action: "Focus pane left", display: [["\u2325", "\u2318", "\u2190"]], mods: ["opt", "cmd"] },
+  { cat: "Split Panes", action: "Focus pane right", display: [["\u2325", "\u2318", "\u2192"]], mods: ["opt", "cmd"] },
+  { cat: "Split Panes", action: "Focus pane up", display: [["\u2325", "\u2318", "\u2191"]], mods: ["opt", "cmd"] },
+  { cat: "Split Panes", action: "Focus pane down", display: [["\u2325", "\u2318", "\u2193"]], mods: ["opt", "cmd"] },
+  { cat: "Split Panes", action: "Focus previous pane (cycle)", detail: "A Ghostty goto_split:previous keybind also cycles panes", unbound: true },
+  { cat: "Split Panes", action: "Focus next pane (cycle)", detail: "A Ghostty goto_split:next keybind also cycles panes", unbound: true },
+  { cat: "Split Panes", action: "Split right", display: [["\u2318", "D"]], mods: ["cmd"] },
+  { cat: "Split Panes", action: "Split down", display: [["\u2318", "\u21E7", "D"]], mods: ["cmd", "shift"] },
+  { cat: "Split Panes", action: "Split browser right", display: [["\u2325", "\u2318", "D"]], mods: ["opt", "cmd"] },
+  { cat: "Split Panes", action: "Split browser down", display: [["\u2325", "\u2318", "\u21E7", "D"]], mods: ["opt", "cmd", "shift"] },
+  { cat: "Split Panes", action: "Toggle pane zoom", display: [["\u2318", "\u21E7", "\u23A9"]], mods: ["cmd", "shift"] },
+  { cat: "Split Panes", action: "Increase font size for every terminal in the selected workspace", display: [["\u2303", "\u2318", "="]], mods: ["ctrl", "cmd"] },
+  { cat: "Split Panes", action: "Decrease font size for every terminal in the selected workspace", display: [["\u2303", "\u2318", "-"]], mods: ["ctrl", "cmd"] },
+  { cat: "Split Panes", action: "Reset font size for every terminal in the selected workspace", display: [["\u2303", "\u2318", "0"]], mods: ["ctrl", "cmd"] },
+  { cat: "Split Panes", action: "Equalize split sizes", display: [["\u2303", "\u2318", "\u21E7", "="]], mods: ["ctrl", "cmd", "shift"] },
+  { cat: "Split Panes", action: "Resize pane left", detail: "Hold the key to keep resizing", display: [["\u2303", "\u21E7", "H"]], mods: ["ctrl", "shift"] },
+  { cat: "Split Panes", action: "Resize pane right", detail: "Hold the key to keep resizing", display: [["\u2303", "\u21E7", "L"]], mods: ["ctrl", "shift"] },
+  { cat: "Split Panes", action: "Resize pane up", detail: "Hold the key to keep resizing", display: [["\u2303", "\u21E7", "K"]], mods: ["ctrl", "shift"] },
+  { cat: "Split Panes", action: "Resize pane down", detail: "Hold the key to keep resizing", display: [["\u2303", "\u21E7", "J"]], mods: ["ctrl", "shift"] },
+  // ---- Canvas ----
+  { cat: "Canvas", action: "Toggle canvas layout", display: [["\u2303", "\u2318", "C"]], mods: ["ctrl", "cmd"] },
+  { cat: "Canvas", action: "Reveal focused pane", display: [["\u2303", "\u2318", "R"]], mods: ["ctrl", "cmd"] },
+  { cat: "Canvas", action: "Toggle overview zoom", display: [["\u2303", "\u2318", "O"]], mods: ["ctrl", "cmd"] },
+  { cat: "Canvas", action: "Zoom in", display: [["\u2325", "\u2318", "="]], mods: ["opt", "cmd"] },
+  { cat: "Canvas", action: "Zoom out", display: [["\u2325", "\u2318", "-"]], mods: ["opt", "cmd"] },
+  { cat: "Canvas", action: "Actual size", display: [["\u2318", "0"]], mods: ["cmd"] },
+  { cat: "Canvas", action: "Tidy panes into a grid", display: [["\u2303", "\u2318", "T"]], mods: ["ctrl", "cmd"] },
+  // ---- Browser ----
+  { cat: "Browser", action: "Open browser", display: [["\u2318", "\u21E7", "L"]], mods: ["cmd", "shift"] },
+  { cat: "Browser", action: "Focus address bar", display: [["\u2318", "L"]], mods: ["cmd"] },
+  { cat: "Browser", action: "Back", display: [["\u2318", "["]], mods: ["cmd"] },
+  { cat: "Browser", action: "Forward", display: [["\u2318", "]"]], mods: ["cmd"] },
+  { cat: "Browser", action: "Reload page", detail: "Focused browser", display: [["\u2318", "R"]], mods: ["cmd"] },
+  { cat: "Browser", action: "Hard refresh page", detail: "Focused browser", display: [["\u2318", "\u21E7", "R"]], mods: ["cmd", "shift"] },
+  { cat: "Browser", action: "Zoom in", display: [["\u2318", "="]], mods: ["cmd"] },
+  { cat: "Browser", action: "Zoom out", display: [["\u2318", "-"]], mods: ["cmd"] },
+  { cat: "Browser", action: "Actual size", display: [["\u2318", "0"]], mods: ["cmd"] },
+  { cat: "Browser", action: "Markdown viewer: zoom in", detail: "Focused markdown viewer", display: [["\u2318", "="]], mods: ["cmd"] },
+  { cat: "Browser", action: "Markdown viewer: zoom out", detail: "Focused markdown viewer", display: [["\u2318", "-"]], mods: ["cmd"] },
+  { cat: "Browser", action: "Markdown viewer: actual size", detail: "Focused markdown viewer", display: [["\u2318", "0"]], mods: ["cmd"] },
+  { cat: "Browser", action: "Toggle browser developer tools", display: [["\u2325", "\u2318", "I"]], mods: ["opt", "cmd"] },
+  { cat: "Browser", action: "Show browser JavaScript console", display: [["\u2325", "\u2318", "C"]], mods: ["opt", "cmd"] },
+  { cat: "Browser", action: "Enter browser focus mode", detail: "Focused web page gets first claim on shortcuts. Press Esc twice to exit", display: [["\u2325", "\u2318", "\u23A9"]], mods: ["opt", "cmd"] },
+  { cat: "Browser", action: "Toggle browser design mode", detail: "Select and visually edit elements in the focused browser", display: [["\u2303", "\u2325", "\u2318", "D"]], mods: ["ctrl", "opt", "cmd"] },
+  { cat: "Browser", action: "Toggle React Grab", detail: "Focused browser, or the only browser pane when a terminal is focused", display: [["\u2318", "\u21E7", "G"]], mods: ["cmd", "shift"] },
+  // ---- Diff Viewer ----
+  { cat: "Diff Viewer", action: "Open diff viewer", display: [["\u2303", "\u2318", "\u21E7", "D"]], mods: ["ctrl", "cmd", "shift"] },
+  { cat: "Diff Viewer", action: "Scroll viewer down one smooth step", detail: "Focused diff or Markdown viewer", display: [["J"]], mods: [] },
+  { cat: "Diff Viewer", action: "Scroll viewer up one smooth step", detail: "Focused diff or Markdown viewer", display: [["K"]], mods: [] },
+  { cat: "Diff Viewer", action: "Scroll viewer down half a page", detail: "Focused diff or Markdown viewer", display: [["\u2303", "D"]], mods: ["ctrl"] },
+  { cat: "Diff Viewer", action: "Scroll viewer up half a page", detail: "Focused diff or Markdown viewer", display: [["\u2303", "U"]], mods: ["ctrl"] },
+  { cat: "Diff Viewer", action: "Scroll viewer down one smooth step (Emacs)", detail: "Focused diff or Markdown viewer", display: [["\u2303", "N"]], mods: ["ctrl"] },
+  { cat: "Diff Viewer", action: "Scroll viewer up one smooth step (Emacs)", detail: "Focused diff or Markdown viewer", display: [["\u2303", "P"]], mods: ["ctrl"] },
+  { cat: "Diff Viewer", action: "Scroll diff to bottom", detail: "Focused diff viewer", display: [["\u21E7", "G"]], mods: ["shift"] },
+  { cat: "Diff Viewer", action: "Scroll diff to top", detail: "Focused diff viewer", display: [["G", "G"]], mods: [] },
+  { cat: "Diff Viewer", action: "Open diff file search", detail: "Focused diff viewer", display: [["/"]], mods: [] },
+  { cat: "Diff Viewer", action: "Jump to next diff file", detail: "Focused diff viewer", display: [["]", "F"]], mods: [] },
+  { cat: "Diff Viewer", action: "Jump to previous diff file", detail: "Focused diff viewer", display: [["[", "F"]], mods: [] },
+  // ---- Find ----
+  { cat: "Find", action: "Find", display: [["\u2318", "F"]], mods: ["cmd"] },
+  { cat: "Find", action: "Find in directory", display: [["\u2318", "\u21E7", "F"]], mods: ["cmd", "shift"] },
+  { cat: "Find", action: "Find next", display: [["\u2318", "G"]], mods: ["cmd"] },
+  { cat: "Find", action: "Find previous", display: [["\u2325", "\u2318", "G"]], mods: ["opt", "cmd"] },
+  { cat: "Find", action: "Hide find bar", display: [["\u2325", "\u2318", "\u21E7", "F"]], mods: ["opt", "cmd", "shift"] },
+  { cat: "Find", action: "Use selection for find", display: [["\u2318", "E"]], mods: ["cmd"] },
+  // ---- Notifications ----
+  { cat: "Notifications", action: "Show notifications", display: [["\u2318", "I"]], mods: ["cmd"] },
+  { cat: "Notifications", action: "Jump to latest unread", display: [["\u2318", "\u21E7", "U"]], mods: ["cmd", "shift"] },
+  { cat: "Notifications", action: "Toggle current item unread state", display: [["\u2325", "\u2318", "U"]], mods: ["opt", "cmd"] },
+  { cat: "Notifications", action: "Mark current item as oldest unread and jump to the next latest unread", display: [["\u2303", "\u2318", "U"]], mods: ["ctrl", "cmd"] },
+  { cat: "Notifications", action: "Mark all notifications read", unbound: true },
+  { cat: "Notifications", action: "Clear all notifications", unbound: true },
+  { cat: "Notifications", action: "Flash focused panel", display: [["\u2318", "\u21E7", "H"]], mods: ["cmd", "shift"] }
+];
+
+const CATS = ["App", "Workspaces", "Surfaces", "Split Panes", "Canvas", "Browser", "Diff Viewer", "Find", "Notifications"];
+const MOD_NAMES = { cmd: "cmd \u2318", ctrl: "ctrl \u2303", opt: "opt \u2325", shift: "shift \u21E7" };
+
+const state = { q: "", cats: new Set(), mods: new Set(), hideUnbound: false };
+
+const $q = document.getElementById("q");
+const $clear = document.getElementById("clearBtn");
+const $reset = document.getElementById("resetBtn");
+const $cats = document.getElementById("catPills");
+const $mods = document.getElementById("modGroup");
+const $list = document.getElementById("list");
+const $count = document.getElementById("count");
+const $empty = document.getElementById("empty");
+const $total = document.getElementById("totalCount");
+const $hide = document.getElementById("hideUnbound");
+
+function displayText(s) {
+  if (s.unbound) return "unbound";
+  return s.display.map(function (alt) { return alt.join("+"); }).join(" / ");
+}
+
+SHORTCUTS.forEach(function (s) {
+  s._hay = (s.action + " " + (s.detail || "") + " " + displayText(s) + " " + s.cat).toLowerCase()
+    .replace(/\u2318/g, "cmd").replace(/\u2303/g, "ctrl").replace(/\u2325/g, "opt").replace(/\u21E7/g, "shift");
+  if (!s.mods) s.mods = [];
+});
+
+function buildCatPills() {
+  $cats.innerHTML = "";
+  CATS.forEach(function (c) {
+    var n = SHORTCUTS.filter(function (s) { return s.cat === c; }).length;
+    var b = document.createElement("button");
+    b.className = "pill";
+    b.setAttribute("aria-pressed", state.cats.has(c) ? "true" : "false");
+    b.innerHTML = "";
+    b.appendChild(document.createTextNode(c + " "));
+    var span = document.createElement("span");
+    span.className = "n";
+    span.textContent = n;
+    b.appendChild(span);
+    b.addEventListener("click", function () {
+      if (state.cats.has(c)) state.cats.delete(c); else state.cats.add(c);
+      b.setAttribute("aria-pressed", state.cats.has(c) ? "true" : "false");
+      render();
+      syncUrl();
+    });
+    $cats.appendChild(b);
+  });
+}
+
+function filtered() {
+  var q = state.q.trim().toLowerCase();
+  return SHORTCUTS.filter(function (s) {
+    if (state.cats.size && !state.cats.has(s.cat)) return false;
+    if (state.hideUnbound && s.unbound) return false;
+    if (state.mods.size) {
+      var hit = false;
+      state.mods.forEach(function (m) { if (s.mods.indexOf(m) !== -1) hit = true; });
+      if (!hit) return false;
+    }
+    if (q && s._hay.indexOf(q) === -1) return false;
+    return true;
+  });
+}
+
+function keyHtml(s) {
+  if (s.unbound) {
+    var u = document.createElement("span");
+    u.className = "unbound";
+    u.textContent = "Unbound";
+    u.title = "Ships with no keys assigned; assign your own in Settings";
+    return u;
+  }
+  var wrap = document.createElement("span");
+  wrap.className = "keys";
+  s.display.forEach(function (alt, i) {
+    if (i > 0) {
+      var sep = document.createElement("span");
+      sep.className = "alt-sep";
+      sep.textContent = "/";
+      wrap.appendChild(sep);
+    }
+    alt.forEach(function (t) {
+      var k = document.createElement("kbd");
+      k.textContent = t;
+      wrap.appendChild(k);
+    });
+  });
+  return wrap;
+}
+
+function render() {
+  var items = filtered();
+  $list.innerHTML = "";
+  var byCat = {};
+  items.forEach(function (s) {
+    (byCat[s.cat] = byCat[s.cat] || []).push(s);
+  });
+  CATS.forEach(function (c) {
+    var rows = byCat[c];
+    if (!rows || !rows.length) return;
+    var sec = document.createElement("section");
+    sec.className = "cat";
+    var h = document.createElement("h2");
+    h.textContent = c + " ";
+    var cnt = document.createElement("span");
+    cnt.className = "cnt";
+    cnt.textContent = rows.length;
+    h.appendChild(cnt);
+    sec.appendChild(h);
+    var card = document.createElement("div");
+    card.className = "card";
+    rows.forEach(function (s) {
+      var row = document.createElement("div");
+      row.className = "row";
+      var main = document.createElement("div");
+      main.className = "main";
+      var a = document.createElement("div");
+      a.className = "action";
+      a.textContent = s.action;
+      main.appendChild(a);
+      if (s.detail) {
+        var d = document.createElement("div");
+        d.className = "detail";
+        d.textContent = s.detail;
+        main.appendChild(d);
+      }
+      row.appendChild(main);
+      row.appendChild(keyHtml(s));
+      var cp = document.createElement("button");
+      cp.className = "copy";
+      cp.textContent = "⧉";
+      cp.title = "Copy shortcut";
+      cp.setAttribute("aria-label", "Copy " + s.action);
+      cp.addEventListener("click", function () {
+        var txt = s.action + " — " + displayText(s);
+        if (navigator.clipboard) navigator.clipboard.writeText(txt);
+        cp.textContent = "✓";
+        setTimeout(function () { cp.textContent = "⧉"; }, 900);
+      });
+      row.appendChild(cp);
+      card.appendChild(row);
+    });
+    sec.appendChild(card);
+    $list.appendChild(sec);
+  });
+  var totalBound = SHORTCUTS.filter(function (s) { return !s.unbound; }).length;
+  var totalUnbound = SHORTCUTS.length - totalBound;
+  $total.textContent = SHORTCUTS.length + " shortcuts (" + totalBound + " bound, " + totalUnbound + " unbound)";
+  var strong = document.createElement("strong");
+  strong.textContent = items.length + " of " + SHORTCUTS.length;
+  $count.innerHTML = "";
+  $count.appendChild(strong);
+  $count.appendChild(document.createTextNode(" shown"));
+  $empty.hidden = items.length !== 0;
+  $clear.style.display = state.q ? "block" : "none";
+}
+
+function syncUrl() {
+  var p = new URLSearchParams();
+  if (state.q) p.set("q", state.q);
+  if (state.cats.size) p.set("cats", Array.from(state.cats).join(","));
+  if (state.mods.size) p.set("mods", Array.from(state.mods).join(","));
+  if (state.hideUnbound) p.set("hideUnbound", "1");
+  var s = p.toString();
+  history.replaceState(null, "", s ? "?" + s : location.pathname);
+}
+
+function fromUrl() {
+  var p = new URLSearchParams(location.search);
+  state.q = p.get("q") || "";
+  (p.get("cats") || "").split(",").forEach(function (c) { if (CATS.indexOf(c) !== -1) state.cats.add(c); });
+  (p.get("mods") || "").split(",").forEach(function (m) { if (MOD_NAMES[m]) state.mods.add(m); });
+  state.hideUnbound = p.get("hideUnbound") === "1";
+}
+
+$q.addEventListener("input", function () {
+  state.q = $q.value;
+  render();
+  syncUrl();
+});
+$clear.addEventListener("click", function () {
+  $q.value = "";
+  state.q = "";
+  render();
+  syncUrl();
+  $q.focus();
+});
+$reset.addEventListener("click", function () {
+  state.q = "";
+  state.cats.clear();
+  state.mods.clear();
+  state.hideUnbound = false;
+  $q.value = "";
+  document.querySelectorAll("#modGroup .mod").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+  $hide.setAttribute("aria-pressed", "false");
+  buildCatPills();
+  render();
+  syncUrl();
+});
+$mods.querySelectorAll(".mod").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var m = b.getAttribute("data-mod");
+    if (state.mods.has(m)) state.mods.delete(m); else state.mods.add(m);
+    b.setAttribute("aria-pressed", state.mods.has(m) ? "true" : "false");
+    render();
+    syncUrl();
+  });
+});
+$hide.addEventListener("click", function () {
+  state.hideUnbound = !state.hideUnbound;
+  $hide.setAttribute("aria-pressed", state.hideUnbound ? "true" : "false");
+  render();
+  syncUrl();
+});
+document.addEventListener("keydown", function (e) {
+  if (e.key === "/" && document.activeElement !== $q) {
+    e.preventDefault();
+    $q.focus();
+  }
+  if (e.key === "Escape" && document.activeElement === $q && $q.value) {
+    $q.value = "";
+    state.q = "";
+    render();
+    syncUrl();
+  }
+});
+
+fromUrl();
+$q.value = state.q;
+document.querySelectorAll("#modGroup .mod").forEach(function (b) {
+  b.setAttribute("aria-pressed", state.mods.has(b.getAttribute("data-mod")) ? "true" : "false");
+});
+$hide.setAttribute("aria-pressed", state.hideUnbound ? "true" : "false");
+buildCatPills();
+render();
+</script>
+</body>
+</html>
