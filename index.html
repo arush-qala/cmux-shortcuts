@@ -177,7 +177,7 @@
 <div class="wrap">
   <div class="count-row">
     <div id="count"></div>
-    <div class="hint">Press <kbd>/</kbd> to focus &middot; <kbd>Esc</kbd> to clear</div>
+    <div class="hint">Press <kbd>⌘F</kbd> or <kbd>/</kbd> to focus &middot; <kbd>Esc</kbd> to clear</div>
   </div>
   <main id="list"></main>
   <div class="empty" id="empty" hidden>
@@ -563,6 +563,12 @@ $hide.addEventListener("click", function () {
   syncUrl();
 });
 document.addEventListener("keydown", function (e) {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "f") {
+    e.preventDefault();
+    $q.focus();
+    $q.select();
+    return;
+  }
   if (e.key === "/" && document.activeElement !== $q) {
     e.preventDefault();
     $q.focus();
